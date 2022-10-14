@@ -18,7 +18,7 @@ public class Fibonacci {
 		case 'a':
 			printR(num);
 			printI(num);
-			//formula(num);
+			printF(num);
 			break;
 		case 'r':
 			printR(num);
@@ -27,7 +27,7 @@ public class Fibonacci {
 			printI(num);
 			break;
 		case 'f':
-			formula(num);
+			printF(num);
 			break;
 		case 'q':
 			quit = true;
@@ -60,9 +60,15 @@ public class Fibonacci {
 		return n3;
 	}
 	
-	static long formula(int n)		//O(log N) (due to exponentiation)
+	static long formula(int n)		//O(N log N) (due to exponentiation) ???
 	{
-		System.out.println("Formulaic method called");
+		double phi = 1.61803398875; double phiHat = -0.61803398875; long ans = 0;
+		double temp;
+		temp = (Math.pow(phi, n)) - (Math.pow(phiHat, n));
+		temp = temp/Math.sqrt(5);
+		ans = Math.round(temp);
+		return ans;
+
 	}
 
 	static void greet()
@@ -130,6 +136,18 @@ public class Fibonacci {
 		startTime = System.nanoTime();
 		System.out.print("The answer using the iterative method is: "
 				+ loop(num));
+		endTime = System.nanoTime();
+		elapsed = endTime - startTime;
+		System.out.println(" and it took " + elapsed + " nano seconds to run");
+	}
+
+	static void printF(int num)
+	{
+		long startTime, endTime, elapsed;
+
+		startTime = System.nanoTime();
+		System.out.print("The answer using the formulaic method is: "
+				+ formula(num));
 		endTime = System.nanoTime();
 		elapsed = endTime - startTime;
 		System.out.println(" and it took " + elapsed + " nano seconds to run");
